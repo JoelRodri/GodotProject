@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/AutoTileMapRed.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Skeleton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scrips/World.gd" type="Script" id=4]
+[ext_resource path="res://scenes/TorreCheckpoint.tscn" type="PackedScene" id=5]
+[ext_resource path="res://dialogues/1/NPC.tscn" type="PackedScene" id=6]
+[ext_resource path="res://dialogues/1/DialoguePlayer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://dialogues/2/NPC2.gd" type="Script" id=8]
+[ext_resource path="res://dialogues/2/DialoguePlayer2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://dialogues/2/NPC2.tscn" type="PackedScene" id=10]
+
+[node name="World" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Torre1" parent="." instance=ExtResource( 5 )]
+position = Vector2( 241, 138 )
+
+[node name="Torre2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 834, -120 )
+
+[node name="TileMap" parent="." instance=ExtResource( 2 )]
+collision_layer = 7
+collision_mask = 0
+tile_data = PoolIntArray( -65513, 0, 196623, -65512, 0, 262145, -65511, 0, 262145, -65510, 0, 262145, -65509, 0, 262145, -65508, 0, 262146, 23, 0, 65540, 65559, 0, 65540, 196599, 0, 262144, 196600, 0, 262145, 196601, 0, 262145, 196602, 0, 262145, 196603, 0, 262145, 196604, 0, 262145, 196605, 0, 262145, 196606, 0, 262145, 196607, 0, 262145, 131072, 0, 262145, 131073, 0, 196624, 131084, 0, 196623, 131085, 0, 262145, 131086, 0, 262145, 131087, 0, 262145, 131088, 0, 262145, 131089, 0, 262145, 131090, 0, 262145, 131091, 0, 262145, 131092, 0, 262145, 131093, 0, 262145, 131094, 0, 262145, 131095, 0, 262160, 196609, 0, 65540, 196620, 0, 65540, 262145, 0, 65540, 262156, 0, 65540, 327681, 0, 65540, 327692, 0, 65540, 393217, 0, 65540, 393228, 0, 65540, 458753, 0, 262159, 458754, 0, 262145, 458755, 0, 262145, 458756, 0, 262145, 458757, 0, 262145, 458758, 0, 262145, 458759, 0, 262145, 458760, 0, 262145, 458761, 0, 262145, 458762, 0, 262145, 458763, 0, 262145, 458764, 0, 262160 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -243, 53 )
+scale = Vector2( 2, 2 )
+collision_layer = 25
+
+[node name="Skeleton" parent="." instance=ExtResource( 3 )]
+position = Vector2( 570, 40 )
+
+[node name="NPC" parent="." instance=ExtResource( 6 )]
+position = Vector2( -58, 53 )
+collision_layer = 17
+
+[node name="DialoguePlayer" parent="NPC" instance=ExtResource( 7 )]
+
+[node name="NPC2" parent="." instance=ExtResource( 10 )]
+script = ExtResource( 8 )
+
+[node name="DialoguePlayer2" parent="NPC2" instance=ExtResource( 9 )]
+dialogue_file = "res://dialogues/npc2.json"
