@@ -2,6 +2,9 @@ extends KinematicBody2D
 #const FIREBALL = preload("res://scenes/Fireball.tscn")
 enum {MOVING, STOP}
 
+signal life_changed(player_hearts)
+
+
 var speed = Vector2(300, 800)
 var gravity = 1000
 var velocity = Vector2()
@@ -11,18 +14,23 @@ var state = MOVING
 
 var mirando = true
 
+var max_hearts: int = 2
+var hearts: float = max_hearts
+
+
 func _ready():
 	$AnimationPlayer.play("Idle")
 	$Sprite.rotation_degrees = 0
 	#$Sprite.position = Vector2(0,-8)
-	
+	connect("life_changed", get_parent().get_node("UI/Life"), "on_player_life_changed")
+	emit_signal("life_changed", max_hearts)
 func _on_VisibilityNotifier2D_screen_exited():
 	get_tree().reload_current_scene()
 
 func _physics_process(delta):
-	var is_jump_interrupted = Input.is_action_just_released("game_jump") and velocity.y < 0.0
+	var is_jump_interrupted = Input.is_action_just_released("player_jump") and velocity.y < 0.0
 	var direction = get_direction()
-	
+	knockback(1,1)
 	calculate_move_velocity(direction, is_jump_interrupted)
 	if(state == STOP):
 		velocity.x = 0
@@ -104,8 +112,7 @@ func calculate_move_velocity(direction, is_jump_interrupted):
 func get_direction():
 	return Vector2(
 		Input.get_action_strength("player_right") - Input.get_action_strength("player_left"),
-		-1.0 if Input.is_action_just_pressed("player_jump") and is_on_floor() else 0.0
-	)
+		-1.0 if Input.is_action_just_pressed("player_jump") and is_on_floor() else 0.0)
 #Dialogo
 func set_active(active):
 	set_physics_process(active)
@@ -121,6 +128,22 @@ func end_of_hit():
 func _on_AttackDetector_body_entered(body):
 	body.die()
 
+func damage(dam: int, dam: int, force: int) -> void:
+	hearts -= dam
+	emit_signal("life_changed", hearts)
+	knockback(dam, force)
+	flash_effect()
+	if hearts <= 0:
+		die()
 
 
+func flash_effect() -> void:
+	pass
+
+func knockback(dir: int, force: int) -> void:
+	velocity += Vector2(dir, -0.9) * force
+	
+#	velocity.x = force
+#	velocity.y = force
+#	velocity = move_and_slide(velocity, Vector2.UP)
 

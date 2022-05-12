@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/AutoTileMapRed.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Skeleton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scrips/World.gd" type="Script" id=4]
+[ext_resource path="res://scripts/World.gd" type="Script" id=4]
 [ext_resource path="res://scenes/TorreCheckpoint.tscn" type="PackedScene" id=5]
 [ext_resource path="res://dialogues/1/NPC.tscn" type="PackedScene" id=6]
 [ext_resource path="res://dialogues/1/DialoguePlayer.tscn" type="PackedScene" id=7]
 [ext_resource path="res://dialogues/2/NPC2.gd" type="Script" id=8]
 [ext_resource path="res://dialogues/2/DialoguePlayer2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://dialogues/2/NPC2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/images/Heart.png" type="Texture" id=11]
+[ext_resource path="res://scripts/Life.gd" type="Script" id=12]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
@@ -44,3 +46,24 @@ script = ExtResource( 8 )
 
 [node name="DialoguePlayer2" parent="NPC2" instance=ExtResource( 9 )]
 dialogue_file = "res://dialogues/npc2.json"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Life" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hearts" type="TextureRect" parent="UI/Life"]
+margin_right = 13.0
+margin_bottom = 11.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

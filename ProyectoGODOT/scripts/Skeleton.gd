@@ -47,8 +47,10 @@ func _on_PlayerDetector_body_entered(body):
 	$AnimationPlayer.play("Attack")
 	
 func _on_AttackDetector_body_entered(body):
-	body.die()
-	#get_tree().reload_current_scene()
+	if body.get_name() == "Player":
+		body.damage(1, 1, 2)
 	
+	#get_tree().reload_current_scene()
+
 func die():
 	queue_free()
