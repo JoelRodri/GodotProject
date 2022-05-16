@@ -129,10 +129,10 @@ func end_of_hit():
 func _on_AttackDetector_body_entered(body):
 	body.die()
 
-func damage(dam: int, dam: int, force: int) -> void:
+func damage(dir: int, dam: int, force: int) -> void:
 	hearts -= dam
 	emit_signal("life_changed", hearts)
-	knockback(dam, force)
+	knockback(dir, force)
 	flash_effect()
 	if hearts <= 0:
 		die()

@@ -48,7 +48,7 @@ func _on_PlayerDetector_body_entered(body):
 	
 func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Player":
-		body.damage(1, 1, 2)
+		body.damage(1,1,2)
 	
 	#get_tree().reload_current_scene()
 
