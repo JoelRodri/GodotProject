@@ -17,6 +17,7 @@ var mirando = true
 var max_hearts: int = 2
 var hearts: float = max_hearts
 
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 func _ready():
 	$AnimationPlayer.play("Idle")
