@@ -9,9 +9,10 @@ var speed = Vector2(300, 800)
 var gravity = 1000
 var velocity = Vector2()
 var attack = false
-
+var inmortal = false
 var state = MOVING
-
+var knockforce = 1000
+var knockback = Vector2.ZERO
 var mirando = true
 
 var max_hearts: int = 2
@@ -21,23 +22,30 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
 func _ready():
 	$AnimationPlayer.play("Idle")
+	$BlinkAnimationPlayer.play("stop")
 	$Sprite.rotation_degrees = 0
 	#$Sprite.position = Vector2(0,-8)
 	connect("life_changed", get_parent().get_node("UI/Life"), "on_player_life_changed")
 	emit_signal("life_changed", max_hearts)
+
 func _on_VisibilityNotifier2D_screen_exited():
-	get_tree().reload_current_scene()
+#	get_tree().reload_current_scene()
+	pass
 
 func _physics_process(delta):
+	if inmortal:
+		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
+		knockback = move_and_slide(knockback)
+		
 	var is_jump_interrupted = Input.is_action_just_released("player_jump") and velocity.y < 0.0
 	var direction = get_direction()
-	knockback(1,1)
 	calculate_move_velocity(direction, is_jump_interrupted)
 	if(state == STOP):
 		velocity.x = 0
 	velocity = move_and_slide(velocity, Vector2.UP)
 	set_animation()
 	set_flip()
+	
 	
 	if Input.is_action_just_pressed("player_atack"):
 		attack = true
@@ -129,22 +137,34 @@ func end_of_hit():
 func _on_AttackDetector_body_entered(body):
 	body.die()
 
-func damage(dam: int, dam: int, force: int) -> void:
-	hearts -= dam
-	emit_signal("life_changed", hearts)
-	knockback(dam, force)
-	flash_effect()
-	if hearts <= 0:
-		die()
+func damage(dam: int) -> void:
+	knockbackFunc()
+	if inmortal == true:
+		pass
+	else:
+		if hearts <= 1:
+			hearts -= dam
+			emit_signal("life_changed", hearts)
+			die()
+		else:
+			flash_effect()
+			inmortal = true
+			hearts -= dam
+			emit_signal("life_changed", hearts)
 
 
 func flash_effect() -> void:
-	pass
+	$BlinkAnimationPlayer.play("start")
+	$flashTimer.start()
 
-func knockback(dir: int, force: int) -> void:
-	velocity += Vector2(dir, -0.9) * force
-	
-#	velocity.x = force
-#	velocity.y = force
-#	velocity = move_and_slide(velocity, Vector2.UP)
 
+func _on_Timer_timeout():
+	$BlinkAnimationPlayer.play("stop")
+	inmortal = false
+
+func knockbackFunc():
+	knockback = Vector2.LEFT * 100
+
+func play_walk_in_animation_in_Door():
+	state = STOP
+	$AnimationPlayer.play("Run")

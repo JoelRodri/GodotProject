@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Checkpoint="*res://scripts/Checkpoint.gd"
+Globals="*res://scripts/Globals.gd"
 
 [input]
 
@@ -61,6 +62,8 @@ player_usage={
 2d_physics/layer_2="Tilemap"
 2d_physics/layer_3="Skeleton"
 2d_physics/layer_4="Checkpoint"
+2d_physics/layer_5="Boss"
+2d_physics/layer_6="Door"
 
 [physics]
 
