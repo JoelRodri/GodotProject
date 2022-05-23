@@ -137,6 +137,7 @@ func end_of_hit():
 func _on_AttackDetector_body_entered(body):
 	body.die()
 
+
 func damage(dam: int) -> void:
 	knockbackFunc()
 	if inmortal == true:
@@ -151,6 +152,7 @@ func damage(dam: int) -> void:
 			inmortal = true
 			hearts -= dam
 			emit_signal("life_changed", hearts)
+
 
 
 func flash_effect() -> void:

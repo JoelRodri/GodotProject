@@ -8,10 +8,10 @@ script = ExtResource( 1 )
 dialogue_file = "res://dialogues/npc.json"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
-margin_left = 7.0
-margin_top = 5.0
-margin_right = 260.0
-margin_bottom = 70.0
+margin_left = 380.0
+margin_top = 9.0
+margin_right = 633.0
+margin_bottom = 74.0
 texture = ExtResource( 2 )
 patch_margin_left = 8
 patch_margin_top = 9
