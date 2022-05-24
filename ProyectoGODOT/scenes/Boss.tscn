@@ -251,7 +251,7 @@ collision_layer = 16
 collision_mask = 2
 script = ExtResource( 2 )
 
-[node name="TextureRect" parent="." instance=ExtResource( 3 )]
+[node name="HPbar" parent="." instance=ExtResource( 3 )]
 margin_left = -9.17482
 margin_top = -17.8881
 margin_right = 10.8252

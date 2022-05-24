@@ -2,6 +2,10 @@ extends KinematicBody2D
 const FIREBALL = preload("res://scenes/Fireball.tscn")
 const STONE = preload("res://scenes/Skeleton.tscn")
 
+export(int) var hitpoints = 100
+var max_hitpoints = hitpoints
+signal life_boss_changed(boss_life)
+
 var gravity =  10 
 var velocity = Vector2(0, 0)
 
@@ -19,8 +23,11 @@ var proceso = false
 var bull = false
 
 func _ready():
-	pass 
-	
+#	connect("life_changed", get_parent().get_node("UI/Life"), "on_player_life_changed")
+#	emit_signal("life_changed", max_hmaearts)
+	connect("life_boss_changed",get_parent().get_node("UIboss/LifeBoss"), "on_boss_life_changed")
+	emit_signal("life_boss_changed", max_hitpoints)
+
 func _physics_process(delta):
 	
 	if jump:
@@ -164,3 +171,10 @@ func move_characterLikeABull():
 	velocity.y += gravity
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
+
+
+func damage(dam: int) -> void:
+	hitpoints -= dam
+	emit_signal("life_boss_changed", hitpoints)
+	if hitpoints <= 0:
+		die()

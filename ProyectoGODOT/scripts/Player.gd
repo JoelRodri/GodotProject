@@ -135,7 +135,10 @@ func end_of_hit():
 	$AttackDetector.monitoring = false
 
 func _on_AttackDetector_body_entered(body):
-	body.die()
+	if body.get_name() == "Boss":
+		body.damage(25)
+	else:
+		body.die()
 
 
 func damage(dam: int) -> void:

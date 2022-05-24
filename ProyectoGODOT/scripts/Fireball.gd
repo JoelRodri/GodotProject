@@ -19,4 +19,4 @@ func _on_Timer_timeout():
 
 func _on_Fireball_body_entered(body):
 	if body.get_name() == "Player":
-		body.die() # Replace with function body.
+		body.damage(1) # Replace with function body.
