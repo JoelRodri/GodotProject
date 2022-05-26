@@ -22,6 +22,9 @@ var proceso = false
 
 var bull = false
 
+var chaseRight = null
+var chaseLeft = null
+
 func _ready():
 #	connect("life_changed", get_parent().get_node("UI/Life"), "on_player_life_changed")
 #	emit_signal("life_changed", max_hmaearts)
@@ -30,6 +33,12 @@ func _ready():
 
 func _physics_process(delta):
 	
+	if chaseRight:
+		move_characterRight()
+
+	if chaseLeft:
+		move_characterLeft()
+		
 	if jump:
 		move_character()
 	else:
@@ -110,10 +119,10 @@ func _right_End():
 	right= false
 
 func _Bull_Start():
-	right = true
+	bull = true
 	
 func _Bull_End():
-	right= false
+	bull= false
 
 	
 func _on_PlayerDetector_body_entered(body):
@@ -179,3 +188,38 @@ func damage(dam: int) -> void:
 	emit_signal("life_boss_changed", hitpoints)
 	if hitpoints <= 0:
 		die()
+
+
+func _on_Area2DRight_body_entered(body):
+	if body.get_name() == "Player":
+		print("funciona")
+		#print(body.position.x)
+		#print(velocity.x)
+		#print(velocity.x - body.position.x)
+		if velocity.x - body.position.x < 0:
+			chaseRight = true
+			chaseLeft = false
+			print("XD")
+		else:
+			chaseLeft = true
+			chaseRight = false
+			print("XD2")
+
+
+		
+
+
+func _on_Area2DLeft_body_entered(body):
+	if body.get_name() == "Player":
+		print("funciona")
+		#print(body.position.x)
+		#print(velocity.x)
+		#print(velocity.x - body.position.x)
+		if velocity.x - body.position.x < 0:
+			chaseRight = true
+			chaseLeft = false
+			print("XD")
+		else:
+			chaseLeft = true
+			chaseRight = false
+			print("XD2")
