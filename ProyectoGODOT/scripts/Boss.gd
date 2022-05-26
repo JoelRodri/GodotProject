@@ -117,6 +117,7 @@ func _Bull_End():
 
 	
 func _on_PlayerDetector_body_entered(body):
+
 	if !proceso:
 		if body.get_name() == "Player":
 			proceso = true

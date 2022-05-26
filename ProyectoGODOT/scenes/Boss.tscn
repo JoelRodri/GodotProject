@@ -291,5 +291,6 @@ wait_time = 0.5
 
 [node name="PathFollow2D" type="PathFollow2D" parent="BossStones"]
 position = Vector2( -0.00754738, -10 )
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="timeout" from="BossStones/Timer" to="." method="_on_Timer_timeout"]
