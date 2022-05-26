@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/AutoTileMapRed.tscn" type="PackedScene" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://scenes/Boss.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/World2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Door.tscn" type="PackedScene" id=15]
+[ext_resource path="res://assets/images/BackgroundGraveyard.png" type="Texture" id=16]
+[ext_resource path="res://assets/images/ExperimentPixel.png" type="Texture" id=17]
 
 [node name="World" type="Node2D"]
 script = ExtResource( 4 )
@@ -40,7 +42,7 @@ position = Vector2( 1390.65, -310.259 )
 scale = Vector2( 5, 5 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1095.96, -61.3699 )
+position = Vector2( 208, -569 )
 scale = Vector2( 2, 2 )
 collision_layer = 25
 
@@ -79,3 +81,22 @@ stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground2"]
+position = Vector2( 510, 301.75 )
+scale = Vector2( 2.036, 1.57532 )
+texture = ExtResource( 17 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_scale = Vector2( 2, 1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+motion_mirroring = Vector2( 972, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2( 514, 300 )
+scale = Vector2( 3.57343, 2.90385 )
+texture = ExtResource( 16 )

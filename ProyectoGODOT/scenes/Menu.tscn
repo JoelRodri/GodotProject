@@ -60,8 +60,9 @@ focus_neighbour_top = NodePath("../Options")
 focus_neighbour_bottom = NodePath("../Start")
 text = "Exit"
 arrow_margin_from_center = 35
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_TextureButton_pressed"]
+
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_TextureButton2_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
