@@ -49,7 +49,9 @@ func _on_PlayerDetector_body_entered(body):
 	
 func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Player":
-		body.damage(1)
+		print(is_moving_left)
+		body.damage(1,is_moving_left)
+		
 
 func die():
 	queue_free()

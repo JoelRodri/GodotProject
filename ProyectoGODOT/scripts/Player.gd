@@ -5,7 +5,7 @@ enum {MOVING, STOP}
 signal life_changed(player_hearts)
 
 
-var speed = Vector2(300, 800)
+var speed = Vector2(350, 800)
 var gravity = 1000
 var velocity = Vector2()
 var attack = false
@@ -145,8 +145,8 @@ func _on_AttackDetector_body_entered(body):
 		body.die()
 
 
-func damage(dam: int) -> void:
-	knockbackFunc()
+func damage(dam: float,watching: bool ) -> void:
+	knockbackFunc(watching)
 	if inmortal == true:
 		pass
 	else:
@@ -166,14 +166,15 @@ func flash_effect() -> void:
 	$BlinkAnimationPlayer.play("start")
 	$flashTimer.start()
 	
-
-
 func _on_Timer_timeout():
 	$BlinkAnimationPlayer.play("stop")
 	inmortal = false
 
-func knockbackFunc():
-	knockback = Vector2.LEFT * 1000
+func knockbackFunc(watching: bool):
+	if watching:
+		knockback = Vector2.RIGHT * 1000
+	else:
+		knockback = Vector2.LEFT * 1000
 
 func play_walk_in_animation_in_Door():
 	state = STOP

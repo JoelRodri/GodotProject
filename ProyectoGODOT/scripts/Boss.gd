@@ -155,13 +155,14 @@ func _shoot():
 	var fireball = FIREBALL.instance()
 	get_parent().add_child(fireball)
 	fireball.position = $Position2D.global_position
-	$BossStones/Timer.start()
+	
 	
 func die():
 	queue_free()
 	
 func _eartquake():
 	Globals.camera.shake(100,2,100)
+	$BossStones/Timer.start()
 	
 func _on_Timer_timeout():
 	shoot_stone() 
