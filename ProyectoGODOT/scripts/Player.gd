@@ -33,16 +33,20 @@ func _on_VisibilityNotifier2D_screen_exited():
 	pass
 
 func _physics_process(delta):
-	if inmortal:
-		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
-		knockback = move_and_slide(knockback)
-		
+	
+	
 	var is_jump_interrupted = Input.is_action_just_released("player_jump") and velocity.y < 0.0
 	var direction = get_direction()
 	calculate_move_velocity(direction, is_jump_interrupted)
 	if(state == STOP):
 		velocity.x = 0
+		
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	if inmortal:
+		knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
+		knockback = move_and_slide(knockback, Vector2.UP)
+		
 	set_animation()
 	set_flip()
 	
@@ -161,6 +165,7 @@ func damage(dam: int) -> void:
 func flash_effect() -> void:
 	$BlinkAnimationPlayer.play("start")
 	$flashTimer.start()
+	
 
 
 func _on_Timer_timeout():
@@ -168,7 +173,7 @@ func _on_Timer_timeout():
 	inmortal = false
 
 func knockbackFunc():
-	knockback = Vector2.LEFT * 100
+	knockback = Vector2.LEFT * 1000
 
 func play_walk_in_animation_in_Door():
 	state = STOP

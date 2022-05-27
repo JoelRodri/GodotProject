@@ -33,11 +33,14 @@ func _ready():
 
 func _physics_process(delta):
 	
+	
+		
 	if chaseRight:
 		move_characterRight()
-
+		
 	if chaseLeft:
 		move_characterLeft()
+
 		
 	if jump:
 		move_character()
@@ -88,7 +91,6 @@ func move_characterLeft():
 func move_characterRight():
 	velocity.x = speed
 	velocity = move_and_slide(velocity, Vector2.UP)
-	
 
 func gravity_character():
 	velocity.y += gravity
@@ -159,7 +161,7 @@ func die():
 	queue_free()
 	
 func _eartquake():
-	Globals.camera.shake(50,1,50)
+	Globals.camera.shake(100,2,100)
 	
 func _on_Timer_timeout():
 	shoot_stone() 
@@ -189,37 +191,19 @@ func damage(dam: int) -> void:
 	if hitpoints <= 0:
 		die()
 
+func _on_Area2DLeft_body_entered(body):
+	if body.get_name() == "Player":
+		left = true
+		right = false
+#		if (velocity.x - body.position.x) > 0:
+#			chaseLeft = true
+#			chaseRight = null
 
 func _on_Area2DRight_body_entered(body):
 	if body.get_name() == "Player":
-		print("funciona")
-		#print(body.position.x)
-		#print(velocity.x)
-		#print(velocity.x - body.position.x)
-		if velocity.x - body.position.x < 0:
-			chaseRight = true
-			chaseLeft = false
-			print("XD")
-		else:
-			chaseLeft = true
-			chaseRight = false
-			print("XD2")
-
-
+		right = true
+		left = false
 		
-
-
-func _on_Area2DLeft_body_entered(body):
-	if body.get_name() == "Player":
-		print("funciona")
-		#print(body.position.x)
-		#print(velocity.x)
-		#print(velocity.x - body.position.x)
-		if velocity.x - body.position.x < 0:
-			chaseRight = true
-			chaseLeft = false
-			print("XD")
-		else:
-			chaseLeft = true
-			chaseRight = false
-			print("XD2")
+#		if (velocity.x - body.position.x) <= 0:
+#			chaseRight = true
+#			chaseLeft = null

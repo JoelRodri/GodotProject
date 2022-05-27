@@ -247,10 +247,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 83, 42.5 )
+extents = Vector2( 83, 89 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 80.5, 42.5 )
+extents = Vector2( 80.5, 89 )
 
 [node name="Boss" type="KinematicBody2D"]
 collision_layer = 16
@@ -300,16 +300,16 @@ position = Vector2( -0.00754738, -10 )
 [node name="Area2DRight" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DRight"]
-position = Vector2( 73, -4.5 )
+position = Vector2( 93, 0 )
 shape = SubResource( 9 )
 
 [node name="Area2DLeft" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DLeft"]
-position = Vector2( -90.5, -4.5 )
+position = Vector2( -90, 0 )
 shape = SubResource( 10 )
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="timeout" from="BossStones/Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="Area2DRight" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2DRight" to="." method="_on_Area2DRight_body_entered"]
 [connection signal="body_entered" from="Area2DLeft" to="." method="_on_Area2DLeft_body_entered"]

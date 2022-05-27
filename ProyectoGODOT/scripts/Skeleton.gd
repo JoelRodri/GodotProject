@@ -44,7 +44,8 @@ func start_walk():
 	$AnimationPlayer.play("Run")
 
 func _on_PlayerDetector_body_entered(body):
-	$AnimationPlayer.play("Attack")
+	if body.get_name() == "Player":
+		$AnimationPlayer.play("Attack")
 	
 func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Player":
