@@ -1,7 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/TextureButton.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/Menu.gd" type="Script" id=2]
+[ext_resource path="res://assets/Gif/ClericBeast-5.png" type="Texture" id=3]
+[ext_resource path="res://assets/Gif/ClericBeast-4.png" type="Texture" id=4]
+[ext_resource path="res://assets/Gif/ClericBeast-1.png" type="Texture" id=5]
+[ext_resource path="res://assets/Gif/ClericBeast-3.png" type="Texture" id=6]
+[ext_resource path="res://assets/Gif/ClericBeast-0.png" type="Texture" id=7]
+[ext_resource path="res://assets/Gif/ClericBeast-2.png" type="Texture" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="MainMenu" type="Node"]
 script = ExtResource( 2 )
@@ -61,9 +77,23 @@ focus_neighbour_bottom = NodePath("../Start")
 text = "Exit"
 arrow_margin_from_center = 35
 
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_TextureButton_pressed"]
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 0.7, 0.7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 70, 46 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
+position = Vector2( 530, 481.429 )
+frames = SubResource( 2 )
+frame = 3
+speed_scale = 0.25
+playing = true
+
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_TextureButton2_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_TextureButton3_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

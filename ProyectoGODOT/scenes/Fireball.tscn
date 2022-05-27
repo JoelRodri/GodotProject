@@ -36,6 +36,7 @@ position = Vector2( -7, -1 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_Fireball_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

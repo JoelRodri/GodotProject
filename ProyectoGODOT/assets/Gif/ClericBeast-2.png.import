@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Fireball2.png-fbe7b756eb86a7f7af8e23bffda0fe3d.stex"
+path="res://.import/ClericBeast-2.png-accaec8ce93cf5b0fe2d9e95b3fc7c44.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/Fireball2.png"
-dest_files=[ "res://.import/Fireball2.png-fbe7b756eb86a7f7af8e23bffda0fe3d.stex" ]
+source_file="res://assets/Gif/ClericBeast-2.png"
+dest_files=[ "res://.import/ClericBeast-2.png-accaec8ce93cf5b0fe2d9e95b3fc7c44.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0
