@@ -25,6 +25,8 @@ var bull = false
 var chaseRight = null
 var chaseLeft = null
 
+var mirando = true
+
 func _ready():
 #	connect("life_changed", get_parent().get_node("UI/Life"), "on_player_life_changed")
 #	emit_signal("life_changed", max_hmaearts)
@@ -33,7 +35,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	
+		
 		
 	if chaseRight:
 		move_characterRight()
@@ -67,6 +69,11 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 		velocity = move_and_slide(velocity, Vector2.UP)
+		if chaseRight:
+			move_characterRight()
+		
+		if chaseLeft:
+			move_characterLeft()
 		
 	gravity_character()
 	
@@ -191,20 +198,51 @@ func damage(dam: int) -> void:
 	emit_signal("life_boss_changed", hitpoints)
 	if hitpoints <= 0:
 		die()
+		
+func _whereWatching():
+	
+	if !mirando:
+		left = true
+		right = false
+	else:
+		left = false
+		right = true
 
 func _on_Area2DLeft_body_entered(body):
 	if body.get_name() == "Player":
-		left = true
-		right = false
+		
+		if mirando:
+			left = true
+			right = false
+			mirando = false
+		else:
+			left = false
+			right = true
+			mirando = true
+		
+		scale.x = -scale.x
+		
 #		if (velocity.x - body.position.x) > 0:
 #			chaseLeft = true
 #			chaseRight = null
 
 func _on_Area2DRight_body_entered(body):
-	if body.get_name() == "Player":
-		right = true
-		left = false
+	pass
+	
+#	if body.get_name() == "Player":
+#		right = true
+#		left = false
+#
+#		mirando = true
 		
+		
+#		scale.x = -scale.x
+#		mirando = true
 #		if (velocity.x - body.position.x) <= 0:
 #			chaseRight = true
 #			chaseLeft = null
+
+func _on_Thornmail_body_entered(body):
+	if body.get_name() == "Player":
+		body.damage(1,mirando)
+	# Replace with function body.

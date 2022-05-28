@@ -42,7 +42,7 @@ scale = Vector2( 3, 3 )
 collision_layer = 25
 
 [node name="Skeleton" parent="." instance=ExtResource( 3 )]
-position = Vector2( 628, -13 )
+position = Vector2( 666, -14 )
 
 [node name="NPC" parent="." instance=ExtResource( 6 )]
 position = Vector2( -58, 53 )
@@ -77,12 +77,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ParallaxBackground2" type="ParallaxBackground" parent="."]
+[node name="BloodMoonBackground" type="ParallaxBackground" parent="."]
 
-[node name="Sprite" type="Sprite" parent="ParallaxBackground2"]
+[node name="Sprite" type="Sprite" parent="BloodMoonBackground"]
 position = Vector2( 514, 304 )
 scale = Vector2( 2.036, 1.57532 )
 texture = ExtResource( 17 )
+
+[node name="BlackTreeBackground" type="ParallaxBackground" parent="."]
+scroll_base_scale = Vector2( 2, 1 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="BlackTreeBackground"]
+motion_scale = Vector2( 0.25, 0.25 )
+motion_mirroring = Vector2( 972, 0 )
+
+[node name="Sprite" type="Sprite" parent="BlackTreeBackground/ParallaxLayer"]
+position = Vector2( 514, 300 )
+scale = Vector2( 3.57343, 2.90385 )
+texture = ExtResource( 16 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 2, 1 )
@@ -92,6 +104,7 @@ motion_scale = Vector2( 0.25, 0.25 )
 motion_mirroring = Vector2( 972, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 514, 300 )
-scale = Vector2( 3.57343, 2.90385 )
+position = Vector2( 514, 1654.37 )
+rotation = 3.14159
+scale = Vector2( 3.573, 10.1383 )
 texture = ExtResource( 16 )

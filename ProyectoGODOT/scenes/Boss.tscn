@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/images/Samurai.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Boss.gd" type="Script" id=2]
@@ -55,6 +55,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "Bull_Charge"
+length = 2.0
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
 tracks/0/interp = 1
@@ -62,15 +63,33 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0.9, 1, 1.9, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "_eartquake"
+}, {
 "args": [  ],
 "method": "_Bull_Start"
 }, {
 "args": [  ],
 "method": "_Bull_End"
+}, {
+"args": [  ],
+"method": "_whereWatching"
 } ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 1.8, 2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0, 90.0, 0.0 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -252,6 +271,9 @@ extents = Vector2( 83, 89 )
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 80.5, 89 )
 
+[sub_resource type="CapsuleShape2D" id=11]
+height = 0.0
+
 [node name="Boss" type="KinematicBody2D"]
 collision_layer = 16
 collision_mask = 2
@@ -287,7 +309,7 @@ anims/Jump = SubResource( 6 )
 anims/RESET = SubResource( 7 )
 
 [node name="BossStones" type="Path2D" parent="."]
-position = Vector2( 20, -20 )
+position = Vector2( -41, -2 )
 scale = Vector2( 10, 1 )
 curve = SubResource( 8 )
 
@@ -298,6 +320,7 @@ wait_time = 0.5
 position = Vector2( -0.00754738, -10 )
 
 [node name="Area2DRight" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DRight"]
 position = Vector2( 93, 0 )
@@ -309,7 +332,14 @@ shape = SubResource( 9 )
 position = Vector2( -90, 0 )
 shape = SubResource( 10 )
 
+[node name="Thornmail" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Thornmail"]
+modulate = Color( 0, 0.298039, 1, 1 )
+shape = SubResource( 11 )
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]
 [connection signal="timeout" from="BossStones/Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Area2DRight" to="." method="_on_Area2DRight_body_entered"]
 [connection signal="body_entered" from="Area2DLeft" to="." method="_on_Area2DLeft_body_entered"]
+[connection signal="body_entered" from="Thornmail" to="." method="_on_Thornmail_body_entered"]

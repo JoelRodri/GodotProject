@@ -24,3 +24,4 @@ func _on_StartBattle_body_entered(body):
 		$Wall.visible = true
 		$Wall.collision_layer = true
 		$Wall.collision_mask = true
+		$Boss._right_Start()

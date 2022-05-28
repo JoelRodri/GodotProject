@@ -14,8 +14,9 @@ var state = MOVING
 var knockforce = 1000
 var knockback = Vector2.ZERO
 var mirando = true
+var footsound = true
 
-var max_hearts: int = 2
+var max_hearts: int = 5
 var hearts: float = max_hearts
 
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
@@ -28,9 +29,7 @@ func _ready():
 	connect("life_changed", get_parent().get_node("UI/Life"), "on_player_life_changed")
 	emit_signal("life_changed", max_hearts)
 
-func _on_VisibilityNotifier2D_screen_exited():
-#	get_tree().reload_current_scene()
-	pass
+
 
 func _physics_process(delta):
 	
@@ -52,6 +51,8 @@ func _physics_process(delta):
 	
 	
 	if Input.is_action_just_pressed("player_atack"):
+		if !attack:
+			$swordSlice.play()
 		attack = true
 		yield(get_node("AnimationPlayer"), "animation_finished")
 		attack = false
@@ -179,3 +180,14 @@ func knockbackFunc(watching: bool):
 func play_walk_in_animation_in_Door():
 	state = STOP
 	$AnimationPlayer.play("Run")
+	
+func run_sound():
+	#footRun1.play()
+	if footsound:
+		$footRun1.play()
+		footsound = false
+		#print("1")
+	else:
+		$footRun2.play()
+		footsound = true
+		#print("2")

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/footRun1.mp3-6e55e4fe1f4612afad0d12c82b970d1e.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/footRun1.mp3"
+dest_files=[ "res://.import/footRun1.mp3-6e55e4fe1f4612afad0d12c82b970d1e.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
