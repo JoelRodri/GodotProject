@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://dialogues/1/DialoguePlayer.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/Dialogo.png" type="Texture" id=2]
+
+[node name="DialoguePlayer3" type="CanvasLayer"]
+script = ExtResource( 1 )
+dialogue_file = "res://dialogues/npc.json"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = 380.0
+margin_top = 9.0
+margin_right = 633.0
+margin_bottom = 74.0
+texture = ExtResource( 2 )
+patch_margin_left = 8
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="Name" type="RichTextLabel" parent="NinePatchRect"]
+margin_left = 6.0
+margin_top = 5.0
+margin_right = 70.0
+margin_bottom = 20.0
+text = "Name"
+
+[node name="Message" type="RichTextLabel" parent="NinePatchRect"]
+margin_left = 6.0
+margin_top = 22.0
+margin_right = 247.0
+margin_bottom = 59.0
+text = "Message"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
