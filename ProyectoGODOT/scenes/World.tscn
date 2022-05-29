@@ -134,7 +134,7 @@ position = Vector2( 5927, -280 )
 position = Vector2( 11394, -442 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 13413, -1693 )
+position = Vector2( 1094, -834 )
 scale = Vector2( 3, 3 )
 collision_layer = 25
 
@@ -232,7 +232,7 @@ motion_scale = Vector2( 0.25, 0.25 )
 motion_mirroring = Vector2( 972, 0 )
 
 [node name="Sprite" type="Sprite" parent="BlackTreeBackground/ParallaxLayer"]
-position = Vector2( 514, 300 )
+position = Vector2( 514, -100 )
 scale = Vector2( 3.57343, 2.90385 )
 texture = ExtResource( 16 )
 
@@ -244,7 +244,7 @@ motion_scale = Vector2( 0.25, 0.25 )
 motion_mirroring = Vector2( 972, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 514, 1654.37 )
+position = Vector2( 514, 1250 )
 rotation = 3.14159
 scale = Vector2( 3.573, 10.1383 )
 texture = ExtResource( 16 )

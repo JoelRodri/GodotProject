@@ -5,7 +5,8 @@ enum {MOVING, STOP}
 signal life_changed(player_hearts)
 
 
-var speed = Vector2(350, 625)
+var speed = Vector2(350, 550)
+#var speed = Vector2(425, 625) NIVEL MAXIMO
 var gravity = 1000
 var velocity = Vector2()
 var attack = false
@@ -143,7 +144,7 @@ func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Boss":
 		body.damage(5)
 	else:
-		body.die()
+		body.die() 
 
 
 func damage(dam: float,watching: bool ) -> void:
