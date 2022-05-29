@@ -137,11 +137,7 @@ position = Vector2( 5927, -280 )
 position = Vector2( 11394, -442 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-<<<<<<< HEAD
 position = Vector2( 6503, -368 )
-=======
-position = Vector2( 1094, -834 )
->>>>>>> 1437a4525d946f1796e58ef56718853ee843f8fd
 scale = Vector2( 3, 3 )
 collision_layer = 25
 
