@@ -1,12 +1,18 @@
 extends Area2D
 
-const SPEED = 100
+const SPEED = 200
 var velocity = Vector2()
+var mirando = true
+
 func _ready():
 	$Timer.start()
 
 func _physics_process(delta):
-	velocity.x = SPEED * delta
+	if mirando:
+		velocity.x = SPEED * delta
+	else:
+		velocity.x = -SPEED * delta
+	
 	translate(velocity)
 	$AnimatedSprite.play("shoot")
 
@@ -19,4 +25,11 @@ func _on_Timer_timeout():
 
 func _on_Fireball_body_entered(body):
 	if body.get_name() == "Player":
-		body.damage(1,true) # Replace with function body.
+		body.damageWithoutKnock(1) # Replace with function body.
+		
+func _mirando(watch: bool):
+	if watch:
+		mirando = true
+	else:
+		mirando = false
+		scale.x = -scale.x

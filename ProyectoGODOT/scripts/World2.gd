@@ -25,3 +25,5 @@ func _on_StartBattle_body_entered(body):
 		$Wall.collision_layer = true
 		$Wall.collision_mask = true
 		$Boss._right_Start()
+		$StartBattle.collision_layer = false
+		$StartBattle.collision_mask = false

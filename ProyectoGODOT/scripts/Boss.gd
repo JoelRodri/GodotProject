@@ -10,7 +10,7 @@ var gravity =  10
 var velocity = Vector2(0, 0)
 
 var speed = 96 
-var speedBull = 5000
+var speedBull = 192
 
 var jump = false
 var fall = false
@@ -21,6 +21,7 @@ var right = false
 var proceso = false
 
 var bull = false
+var bullInvert = false
 
 var chaseRight = null
 var chaseLeft = null
@@ -69,26 +70,27 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 		velocity = move_and_slide(velocity, Vector2.UP)
-		if chaseRight:
-			move_characterRight()
-		
-		if chaseLeft:
-			move_characterLeft()
-		
+
+	if bullInvert:
+		move_characterLikeABullInvert()
+	else:
+		velocity.x = 0
+		velocity = move_and_slide(velocity, Vector2.UP)
 	gravity_character()
 	
 	if Input.is_action_just_pressed("test_key"):
 			_shoot()
 
 func move_character():
-	velocity.x = -speed
-	velocity.y = -speed/2
-	
+	velocity.x = -speed*2
+	velocity.y = -speed/3
+
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 func move_character2():
-	velocity.x = speed
-	velocity.y = -speed/2
+	velocity.x = speed*2
+	velocity.y = -speed/3
+	
 	velocity = move_and_slide(velocity, Vector2.UP)
 	
 func move_characterLeft():
@@ -133,28 +135,27 @@ func _Bull_Start():
 func _Bull_End():
 	bull= false
 
+func _BullInvert_Start():
+	bullInvert = true
+	
+func _BullInvert_End():
+	bullInvert= false
+
 	
 func _on_PlayerDetector_body_entered(body):
 
 	if !proceso:
 		if body.get_name() == "Player":
 			proceso = true
-			$AnimationPlayer.play("Attack_Projectile")
-			yield(get_node("AnimationPlayer"), "animation_finished")
-			$AnimationPlayer.play("Jump")
-			yield(get_node("AnimationPlayer"), "animation_finished")
-			$AnimationPlayer.play("Fall")
-			yield(get_node("AnimationPlayer"), "animation_finished")
-			$AnimationPlayer.play("Bull_Charge")
-			yield(get_node("AnimationPlayer"), "animation_finished")
-			proceso = false
+			_randomAbility()
 	
-func attack_proyectile():
-	var count = 3
+func _spawn_Timer():
+	var count = 2
 	
 	while count > 0:
-		_shoot()
-		print(" %d seconds" % count)
+		#_shoot()
+		$BossStones/Timer.start()
+		#print(" %d seconds" % count)
 		count -= 1
 		yield(get_tree().create_timer(1.0), "timeout") 
 	
@@ -162,14 +163,22 @@ func _shoot():
 	var fireball = FIREBALL.instance()
 	get_parent().add_child(fireball)
 	fireball.position = $Position2D.global_position
-	
-	
+	fireball._mirando(mirando)
+
+func _shootBig():
+	var fireball = FIREBALL.instance()
+	get_parent().add_child(fireball)
+	fireball.position = $Position2D.global_position
+	fireball.scale.y = 2
+	fireball.scale.x = 2
+	fireball._mirando(mirando)
 func die():
 	queue_free()
 	
 func _eartquake():
-	Globals.camera.shake(100,2,100)
-	$BossStones/Timer.start()
+	Globals.camera.shake(100,1,200)
+	_spawn_Timer()
+	#$BossStones/Timer.start()
 	
 func _on_Timer_timeout():
 	shoot_stone() 
@@ -187,11 +196,16 @@ func get_random_position():
 	return $BossStones/PathFollow2D.global_position
 	
 func move_characterLikeABull():
-	velocity.x = speed*10 #if is_moving_left else -speed
+	velocity.x = speedBull*10 #if is_moving_left else -speed
 	velocity.y += gravity
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+func move_characterLikeABullInvert():
+	velocity.x = -speedBull*10 
+	velocity.y += gravity
+	
+	velocity = move_and_slide(velocity, Vector2.UP)
 
 func damage(dam: int) -> void:
 	hitpoints -= dam
@@ -200,27 +214,32 @@ func damage(dam: int) -> void:
 		die()
 		
 func _whereWatching():
-	
-	if !mirando:
-		left = true
-		right = false
-	else:
-		left = false
-		right = true
-
-func _on_Area2DLeft_body_entered(body):
-	if body.get_name() == "Player":
-		
-		if mirando:
+	if !proceso:
+		$Area2DLeft.collision_layer = false
+		$Area2DLeft.collision_mask = false
+		if !mirando:
 			left = true
 			right = false
-			mirando = false
 		else:
 			left = false
 			right = true
-			mirando = true
 		
-		scale.x = -scale.x
+		$Area2DLeft.collision_layer = true
+		$Area2DLeft.collision_mask = true
+
+func _on_Area2DLeft_body_entered(body):
+	if !proceso:
+		if body.get_name() == "Player":
+			if mirando:
+				left = true
+				right = false
+				mirando = false
+			else:
+				left = false
+				right = true
+				mirando = true
+			
+			scale.x = -scale.x
 		
 #		if (velocity.x - body.position.x) > 0:
 #			chaseLeft = true
@@ -228,14 +247,11 @@ func _on_Area2DLeft_body_entered(body):
 
 func _on_Area2DRight_body_entered(body):
 	pass
-	
 #	if body.get_name() == "Player":
 #		right = true
 #		left = false
 #
 #		mirando = true
-		
-		
 #		scale.x = -scale.x
 #		mirando = true
 #		if (velocity.x - body.position.x) <= 0:
@@ -246,3 +262,55 @@ func _on_Thornmail_body_entered(body):
 	if body.get_name() == "Player":
 		body.damage(1,mirando)
 	# Replace with function body.
+	
+func _randomAbility():
+
+	var x = randi()%4+1
+	#x = 4
+	match x:
+		1:
+			right = false
+			left = false
+			$AnimationPlayer.play("Attack_Projectile")
+			yield(get_node("AnimationPlayer"), "animation_finished")
+			
+		2:
+			if mirando:
+				$AnimationPlayer.play("Fall")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+				scale.x = -scale.x
+				$AnimationPlayer.play("Jump")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+				$AnimationPlayer.play("Rest")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+				mirando = false
+				
+			else:
+				$AnimationPlayer.play("Jump")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+				scale.x = -scale.x
+				$AnimationPlayer.play("Fall")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+				$AnimationPlayer.play("Rest")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+				mirando = true
+				
+		3:
+			print("SE CURA")
+		4:
+			if mirando:
+				$AnimationPlayer.play("Bull_Charge")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+			else:
+				$AnimationPlayer.play("Bull_ChargeInvert")
+				yield(get_node("AnimationPlayer"), "animation_finished")
+			
+	proceso = false
+#	$AnimationPlayer.play("Attack_Projectile")
+#	yield(get_node("AnimationPlayer"), "animation_finished")
+#	$AnimationPlayer.play("Jump")
+#	yield(get_node("AnimationPlayer"), "animation_finished")
+#	$AnimationPlayer.play("Fall")
+#	yield(get_node("AnimationPlayer"), "animation_finished")
+#	$AnimationPlayer.play("Bull_Charge")
+#	yield(get_node("AnimationPlayer"), "animation_finished")

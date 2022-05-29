@@ -76,7 +76,7 @@ tracks/0/keys = {
 extents = Vector2( 3.5, 10 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 2.75, 5.5 )
+extents = Vector2( 16.4375, 12 )
 
 [node name="Skeleton" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
@@ -123,7 +123,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
 modulate = Color( 0.243137, 0, 1, 1 )
-position = Vector2( 22, -1 )
+position = Vector2( 9.0625, -1.5 )
 shape = SubResource( 6 )
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_PlayerDetector_body_entered"]

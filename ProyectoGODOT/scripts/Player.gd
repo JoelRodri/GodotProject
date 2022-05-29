@@ -5,7 +5,7 @@ enum {MOVING, STOP}
 signal life_changed(player_hearts)
 
 
-var speed = Vector2(350, 800)
+var speed = Vector2(350, 625)
 var gravity = 1000
 var velocity = Vector2()
 var attack = false
@@ -148,6 +148,18 @@ func _on_AttackDetector_body_entered(body):
 
 func damage(dam: int,watching: bool ) -> void:
 	knockbackFunc(watching)
+	if !inmortal:
+		if hearts <= 1:
+			hearts -= dam
+			emit_signal("life_changed", hearts)
+			die()
+		else:
+			flash_effect()
+			inmortal = true
+			hearts -= dam
+			emit_signal("life_changed", hearts)
+			
+func damageWithoutKnock(dam: int) -> void:
 	if inmortal == true:
 		pass
 	else:
