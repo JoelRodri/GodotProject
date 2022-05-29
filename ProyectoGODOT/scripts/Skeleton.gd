@@ -4,7 +4,7 @@ var is_moving_left = true
 
 var gravity =  10 
 var velocity = Vector2(0, 0)
-
+var life: float = 3
 var speed = 32 
 
 func _ready():
@@ -55,3 +55,8 @@ func _on_AttackDetector_body_entered(body):
 
 func die():
 	queue_free()
+
+func damage(dam: float):
+	life -= dam
+	if life <= 0:
+		die()

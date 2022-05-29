@@ -142,8 +142,10 @@ func end_of_hit():
 func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Boss":
 		body.damage(5)
+	elif body.get_name() == "Skeleton2" || body.get_name() == "Skeleton3" || body.get_name() == "Skeleton10":
+		body.damage(1)
 	else:
-		body.die()
+		body.damage(1.5)
 
 
 func damage(dam: float,watching: bool ) -> void:

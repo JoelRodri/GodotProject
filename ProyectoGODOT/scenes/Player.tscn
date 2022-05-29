@@ -12,7 +12,7 @@
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 3 )
-shader_param/active = false
+shader_param/active = true
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 5, 7.5 )

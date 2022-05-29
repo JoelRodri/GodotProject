@@ -67,6 +67,8 @@ rotation = 1.5708
 script = SubResource( 5 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="Path2D/PathFollow2D"]
+collision_layer = 128
+collision_mask = 0
 
 [node name="Sprite" type="Sprite" parent="Path2D/PathFollow2D/KinematicBody2D"]
 rotation = 1.5708
