@@ -111,6 +111,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 5.5 )
 
 [node name="Door" type="Area2D"]
 collision_layer = 64
@@ -126,4 +127,5 @@ anims/Open = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4.5 )
 shape = SubResource( 4 )
