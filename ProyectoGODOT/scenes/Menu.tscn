@@ -93,13 +93,13 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
 position = Vector2( 530, 481.429 )
 frames = SubResource( 2 )
-frame = 5
+frame = 4
 speed_scale = 0.25
 playing = true
 
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_TextureButton2_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_TextureButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_TextureButton3_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_TextureButton2_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_TextureButton3_pressed"]

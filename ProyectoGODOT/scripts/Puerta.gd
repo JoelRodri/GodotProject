@@ -8,4 +8,4 @@ func _ready():
 
 func _on_Area2D_body_entered(body):
 	if body.get_name() == "Player":
-		body.damage(1)
+		body.damage(0.5,true)
