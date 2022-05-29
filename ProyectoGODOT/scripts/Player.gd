@@ -5,7 +5,8 @@ enum {MOVING, STOP}
 signal life_changed(player_hearts)
 
 
-var speed = Vector2(350, 625)
+var speed = Vector2(350, 550)
+#var speed = Vector2(425, 625) NIVEL MAXIMO
 var gravity = 1000
 var velocity = Vector2()
 var attack = false
@@ -145,7 +146,11 @@ func _on_AttackDetector_body_entered(body):
 	elif body.get_name() == "Skeleton2" || body.get_name() == "Skeleton3" || body.get_name() == "Skeleton10":
 		body.damage(1)
 	else:
+<<<<<<< HEAD
 		body.damage(1.5)
+=======
+		body.die() 
+>>>>>>> 1437a4525d946f1796e58ef56718853ee843f8fd
 
 
 func damage(dam: float,watching: bool ) -> void:

@@ -78,8 +78,6 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, Vector2.UP)
 	gravity_character()
 	
-	if Input.is_action_just_pressed("test_key"):
-			_shoot()
 
 func move_character():
 	velocity.x = -speed*2
