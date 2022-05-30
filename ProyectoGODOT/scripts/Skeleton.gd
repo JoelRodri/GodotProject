@@ -7,13 +7,21 @@ var velocity = Vector2(0, 0)
 var life: float = 3
 var speed = 32 
 
+var knockforce = 1000
+var knockback = Vector2.ZERO
+var takedamage = false
+
+
 func _ready():
 	$AnimationPlayer.play("Run")
 
 func _process(_delta):
+	if takedamage:
+		knockback = knockback.move_toward(Vector2.ZERO, 200 * _delta)
+		knockback = move_and_slide(knockback, Vector2.UP)
+		
 	if $AnimationPlayer.current_animation == "Attack":
 		return
-	
 	move_character()
 	detect_turn_around()
 	detect_turn_around2()
@@ -49,14 +57,21 @@ func _on_PlayerDetector_body_entered(body):
 	
 func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Player":
-		print(is_moving_left)
 		body.damage(1,is_moving_left)
 		
 
 func die():
 	queue_free()
 
-func damage(dam: float):
+func damage(dam: float,watching: bool):
+	knockbackFunc(watching)
 	life -= dam
 	if life <= 0:
 		die()
+		
+func knockbackFunc(watching: bool):
+	takedamage = true
+	if watching:
+		knockback = Vector2.RIGHT * 600
+	else:
+		knockback = Vector2.LEFT * 600

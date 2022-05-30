@@ -144,9 +144,11 @@ func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Boss":
 		body.damage(5)
 	elif body.get_name() == "Skeleton2" || body.get_name() == "Skeleton3" || body.get_name() == "Skeleton10":
-		body.damage(1)
+		body.damage(1,mirando)
+	elif body.get_name() == "Player":
+		pass
 	else:
-		body.damage(1.5)
+		body.damage(1.5,mirando)
 
 
 
@@ -189,9 +191,9 @@ func _on_Timer_timeout():
 
 func knockbackFunc(watching: bool):
 	if watching:
-		knockback = Vector2.RIGHT * 1000
+		knockback = Vector2.RIGHT * 100
 	else:
-		knockback = Vector2.LEFT * 1000
+		knockback = Vector2.LEFT * 100
 
 func play_walk_in_animation_in_Door():
 	state = STOP

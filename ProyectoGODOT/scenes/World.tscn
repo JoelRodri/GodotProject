@@ -137,12 +137,12 @@ position = Vector2( 5927, -280 )
 position = Vector2( 11394, -442 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -6, -643 )
+position = Vector2( 13023, -2141 )
 scale = Vector2( 3, 3 )
 collision_layer = 25
 
 [node name="Skeleton" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1315, -343 )
+position = Vector2( 6002, -904 )
 scale = Vector2( 3, 3 )
 
 [node name="Skeleton2" parent="." instance=ExtResource( 3 )]
@@ -172,7 +172,7 @@ position = Vector2( 13028, -297 )
 position = Vector2( 13919, -374 )
 
 [node name="Skeleton9" parent="." instance=ExtResource( 3 )]
-position = Vector2( 14098, -374 )
+position = Vector2( 14074, -377 )
 
 [node name="Skeleton10" parent="." instance=ExtResource( 3 )]
 position = Vector2( 14390, -399 )

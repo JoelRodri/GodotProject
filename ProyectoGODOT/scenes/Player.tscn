@@ -155,7 +155,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 6.5625, 12.5 )
+extents = Vector2( 9.5, 12.5 )
 
 [sub_resource type="Animation" id=11]
 resource_name = "start"
@@ -226,7 +226,7 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackDetector"]
 self_modulate = Color( 0.101961, 0, 1, 1 )
-position = Vector2( 15.4375, -12.5 )
+position = Vector2( 15.5, -12.5 )
 shape = SubResource( 10 )
 
 [node name="Position2D" type="Position2D" parent="."]
