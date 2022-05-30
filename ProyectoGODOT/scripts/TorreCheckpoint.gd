@@ -12,3 +12,5 @@ func _on_Area2D_body_entered(body):
 	if used == false:
 		$AnimationPlayer.play("On")
 		Checkpoint.last_position = global_position
+		#print(Checkpoint.last_position)
+		Checkpoint._save_game()

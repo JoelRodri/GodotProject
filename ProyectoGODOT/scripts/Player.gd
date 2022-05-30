@@ -34,7 +34,10 @@ func _ready():
 
 func _physics_process(delta):
 	
-	
+	if Input.is_action_just_pressed("player_menu"):
+		get_tree().change_scene("res://scenes/Menu.tscn")
+		
+		
 	var is_jump_interrupted = Input.is_action_just_released("player_jump") and velocity.y < 0.0
 	var direction = get_direction()
 	calculate_move_velocity(direction, is_jump_interrupted)
