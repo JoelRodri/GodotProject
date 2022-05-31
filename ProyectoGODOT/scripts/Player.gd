@@ -157,16 +157,16 @@ func _on_AttackDetector_body_entered(body):
 
 func damage(dam: float,watching: bool ) -> void:
 	knockbackFunc(watching)
+	
 	if !inmortal:
-		if hearts <= 1:
-			hearts -= dam
-			emit_signal("life_changed", hearts)
+		hearts -= dam
+		emit_signal("life_changed", hearts)
+		if hearts <= 0:
 			die()
 		else:
 			flash_effect()
 			inmortal = true
-			hearts -= dam
-			emit_signal("life_changed", hearts)
+			
 			
 func damageWithoutKnock(dam: int) -> void:
 	if inmortal == true:
