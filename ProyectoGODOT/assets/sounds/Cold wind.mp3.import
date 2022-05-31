@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Cold wind.mp3-7c8ceee36ba93bd4bc817c0d8ce66d56.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Cold wind.mp3"
+dest_files=[ "res://.import/Cold wind.mp3-7c8ceee36ba93bd4bc817c0d8ce66d56.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

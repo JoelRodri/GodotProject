@@ -72,6 +72,6 @@ func damage(dam: float,watching: bool):
 func knockbackFunc(watching: bool):
 	takedamage = true
 	if watching:
-		knockback = Vector2.RIGHT * 600
+		knockback = Vector2.RIGHT * 200
 	else:
-		knockback = Vector2.LEFT * 600
+		knockback = Vector2.LEFT * 200

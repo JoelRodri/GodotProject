@@ -27,3 +27,5 @@ func _on_StartBattle_body_entered(body):
 		$Boss._right_Start()
 		$StartBattle.collision_layer = false
 		$StartBattle.collision_mask = false
+		$Boss/AudioStreamPlayer2D.play()
+		$MusicaNode/Area2D/MusicaPlayer.stop()

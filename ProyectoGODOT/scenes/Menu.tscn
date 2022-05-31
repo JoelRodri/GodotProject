@@ -43,6 +43,7 @@ margin_bottom = 300.0
 rect_min_size = Vector2( 0, 300 )
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
+visible = false
 margin_left = 476.0
 margin_top = 143.0
 margin_right = 548.0
@@ -97,9 +98,9 @@ frame = 1
 speed_scale = 0.25
 playing = true
 
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_TextureButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_TextureButton2_pressed"]
-[connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_TextureButton3_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

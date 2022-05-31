@@ -11,9 +11,6 @@ margin_right = 10.6217
 margin_bottom = 3.69094
 texture = ExtResource( 3 )
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 margin_left = 3.34656

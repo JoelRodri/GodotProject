@@ -8,6 +8,7 @@ signal life_boss_changed(boss_life)
 
 var gravity =  10 
 var velocity = Vector2(0, 0)
+var atk = 1
 
 var speed = 96 
 var speedBull = 192
@@ -148,7 +149,7 @@ func _on_PlayerDetector_body_entered(body):
 			_randomAbility()
 	
 func _spawn_Timer():
-	var count = 2
+	var count = 1
 	
 	while count > 0:
 		#_shoot()
@@ -171,6 +172,22 @@ func _shootBig():
 	fireball.scale.x = 2
 	fireball._mirando(mirando)
 func die():
+	
+	right = false
+	left = false
+	$AnimationPlayer.play("Dead")
+	
+	$".".collision_layer = false
+	$".".collision_mask = false
+	yield(get_node("AnimationPlayer"), "animation_finished")
+	
+	var count = 50
+	
+	while count > 0:
+		$AudioStreamPlayer2D.set_volume_db(count-55)
+		count -= 5
+		yield(get_tree().create_timer(0.5), "timeout") 
+	
 	queue_free()
 	
 func _eartquake():
@@ -204,6 +221,17 @@ func move_characterLikeABullInvert():
 	velocity.y += gravity
 	
 	velocity = move_and_slide(velocity, Vector2.UP)
+	
+func _healing():
+	var count = 4
+	
+	while count > 0:
+		#_shoot()
+		#print(" %d seconds" % count)
+		count -= 1
+		hitpoints+=3
+		emit_signal("life_boss_changed", hitpoints)
+		yield(get_tree().create_timer(0.5), "timeout") 
 
 func damage(dam: int) -> void:
 	hitpoints -= dam
@@ -258,13 +286,13 @@ func _on_Area2DRight_body_entered(body):
 
 func _on_Thornmail_body_entered(body):
 	if body.get_name() == "Player":
-		body.damage(1,mirando)
+		body.damage(atk,mirando)
 	# Replace with function body.
 	
 func _randomAbility():
 
 	var x = randi()%4+1
-	#x = 4
+	#x = 3
 	match x:
 		1:
 			right = false
@@ -294,15 +322,20 @@ func _randomAbility():
 				mirando = true
 				
 		3:
-			print("SE CURA")
+			right = false
+			left = false
+			$AnimationPlayer.play("Healing")
+			yield(get_node("AnimationPlayer"), "animation_finished")
+			#print("SE CURA")
 		4:
+			atk = 3
 			if mirando:
 				$AnimationPlayer.play("Bull_Charge")
 				yield(get_node("AnimationPlayer"), "animation_finished")
 			else:
 				$AnimationPlayer.play("Bull_ChargeInvert")
 				yield(get_node("AnimationPlayer"), "animation_finished")
-			
+			atk = 1
 	proceso = false
 #	$AnimationPlayer.play("Attack_Projectile")
 #	yield(get_node("AnimationPlayer"), "animation_finished")

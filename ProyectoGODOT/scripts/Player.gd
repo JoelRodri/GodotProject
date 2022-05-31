@@ -145,7 +145,7 @@ func end_of_hit():
 
 func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Boss":
-		body.damage(5)
+		body.damage(3)
 	elif body.get_name() == "Skeleton2" || body.get_name() == "Skeleton3" || body.get_name() == "Skeleton10":
 		body.damage(1,mirando)
 	elif body.get_name() == "Player":
@@ -194,9 +194,9 @@ func _on_Timer_timeout():
 
 func knockbackFunc(watching: bool):
 	if watching:
-		knockback = Vector2.RIGHT * 100
+		knockback = Vector2.RIGHT * 200
 	else:
-		knockback = Vector2.LEFT * 100
+		knockback = Vector2.LEFT * 200
 
 func play_walk_in_animation_in_Door():
 	state = STOP
