@@ -5,7 +5,7 @@ enum {MOVING, STOP}
 signal life_changed(player_hearts)
 
 
-var speed = Vector2(350, 550)
+var speed = Vector2(350, 575)
 #var speed = Vector2(425, 625) NIVEL MAXIMO
 var gravity = 1000
 var velocity = Vector2()

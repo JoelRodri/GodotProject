@@ -151,8 +151,11 @@ max_distance = 10000.0
 [node name="Torre4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 11394, -442 )
 
+[node name="Torre5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 13280, -1652 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -431, -909 )
+position = Vector2( -431, -907 )
 scale = Vector2( 3, 3 )
 collision_layer = 537
 
