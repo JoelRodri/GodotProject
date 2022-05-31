@@ -69,6 +69,7 @@ player_menu={
 2d_physics/layer_5="Boss"
 2d_physics/layer_6="Door"
 2d_physics/layer_7="Wall"
+2d_physics/layer_10="NPC"
 
 [physics]
 

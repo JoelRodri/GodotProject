@@ -144,16 +144,17 @@ position = Vector2( 5927, -280 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Torre3"]
 stream = ExtResource( 22 )
-volume_db = -25.0
+volume_db = -15.0
+autoplay = true
 max_distance = 10000.0
 
 [node name="Torre4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 11394, -442 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -423, -930 )
+position = Vector2( -431, -909 )
 scale = Vector2( 3, 3 )
-collision_layer = 25
+collision_layer = 537
 
 [node name="Skeleton" parent="." instance=ExtResource( 3 )]
 position = Vector2( 5770, -239 )
@@ -193,14 +194,13 @@ position = Vector2( 14390, -399 )
 scale = Vector2( 4.5, 4.5 )
 
 [node name="NPC" parent="." instance=ExtResource( 6 )]
-position = Vector2( 3257, -344 )
+position = Vector2( 3226, -343 )
 scale = Vector2( 2, 2 )
-collision_layer = 17
 
 [node name="DialoguePlayer" parent="NPC" instance=ExtResource( 7 )]
 
 [node name="NPC2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 4820, -211 )
+position = Vector2( 6479, -310 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 8 )
 
@@ -208,10 +208,11 @@ script = ExtResource( 8 )
 dialogue_file = "res://dialogues/npc2.json"
 
 [node name="NPC3" parent="." instance=ExtResource( 19 )]
-position = Vector2( 9135, -436 )
+position = Vector2( 11289, -374 )
 scale = Vector2( 2, 2 )
 
-[node name="DialoguePlayer2" parent="NPC3" instance=ExtResource( 18 )]
+[node name="DialoguePlayer3" parent="NPC3" instance=ExtResource( 18 )]
+dialogue_file = "res://dialogues/npc3.json"
 
 [node name="UI" type="CanvasLayer" parent="."]
 

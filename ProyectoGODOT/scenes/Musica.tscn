@@ -14,4 +14,5 @@ shape = SubResource( 1 )
 
 [node name="MusicaPlayer" type="AudioStreamPlayer2D" parent="Area2D"]
 stream = ExtResource( 1 )
+volume_db = 5.0
 autoplay = true

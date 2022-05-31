@@ -7,7 +7,7 @@ func _input(event):
 		find_and_use_dialogue()
 		
 func find_and_use_dialogue():
-	var dialogue_player = get_node_or_null("DialoguePlayer2")
+	var dialogue_player = get_node_or_null("DialoguePlayer3")
 	
 	if dialogue_player:
 		dialogue_player.play()

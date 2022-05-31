@@ -292,7 +292,7 @@ func _on_Thornmail_body_entered(body):
 func _randomAbility():
 
 	var x = randi()%4+1
-	#x = 3
+	#x = 4
 	match x:
 		1:
 			right = false
