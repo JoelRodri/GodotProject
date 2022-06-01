@@ -1,6 +1,7 @@
 extends Node
 
 var last_position = null
+var fileCreated = false
 var save_game_filepath = "res://assets/savefile"
 
 
@@ -18,7 +19,8 @@ func _save_game():
 
 func _load_game():
 	var save_file = File.new()   
-	if not save_file.file_exists(save_game_filepath):
+	#if not save_file.file_exists(save_game_filepath) && !fileCreated:
+	if !fileCreated:
 		print("No hay partida guardada")
 		last_position = Vector2(13280, -1652)
 		get_tree().change_scene("res://scenes/World.tscn")
@@ -30,5 +32,6 @@ func _load_game():
 		get_tree().change_scene("res://scenes/World.tscn")
 		
 func _new_game():
+	fileCreated = true
 	last_position = null
 	get_tree().change_scene("res://scenes/World.tscn")

@@ -4,9 +4,13 @@ enum {MOVING, STOP}
 
 signal life_changed(player_hearts)
 
+# VARIABLES
 
 var speed = Vector2(350, 575)
-#var speed = Vector2(425, 625) NIVEL MAXIMO
+
+# NIVEL MAXIMO (lvl 3)
+# var speed = Vector2(425, 625) 
+
 var gravity = 1000
 var velocity = Vector2()
 var attack = false
@@ -22,6 +26,10 @@ var hearts: float = max_hearts
 
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 
+# Metodo _ready
+# Cuando el nodo está "listo", es decir, cuando tanto el nodo como sus hijos han entrado en el árbol de la escena.
+# Pone por defecto los siguientes valores
+
 func _ready():
 	$AnimationPlayer.play("Idle")
 	$BlinkAnimationPlayer.play("stop")
@@ -31,13 +39,15 @@ func _ready():
 	emit_signal("life_changed", max_hearts)
 
 
-
+# Metodo _physics_process
+# Loop de fisicas del videojuego llamado durante el paso de procesamiento principal
 func _physics_process(delta):
 	
+	# Cuando pulsamos la tecla "Esc" Escape nos dirigimos al Menu
 	if Input.is_action_just_pressed("player_menu"):
 		get_tree().change_scene("res://scenes/Menu.tscn")
 		
-		
+	# Cuando dejamos de pulsar la tecla "W" o "Space" espacio deja de saltar	
 	var is_jump_interrupted = Input.is_action_just_released("player_jump") and velocity.y < 0.0
 	var direction = get_direction()
 	calculate_move_velocity(direction, is_jump_interrupted)
@@ -53,7 +63,7 @@ func _physics_process(delta):
 	set_animation()
 	set_flip()
 	
-	
+	# Cuando pulsamos click "Izquierdo" golpeamos 
 	if Input.is_action_just_pressed("player_atack"):
 		if !attack:
 			$swordSlice.play()
@@ -61,7 +71,8 @@ func _physics_process(delta):
 		yield(get_node("AnimationPlayer"), "animation_finished")
 		attack = false
 
-
+# Habilidad de disparar un proyectil
+# DESACTIVADA (Desbloqueable al matar al boss)
 
 #   Metodo proyectil(fireball)
 #	if Input.is_action_just_pressed("test_key"):
@@ -69,14 +80,16 @@ func _physics_process(delta):
 #		get_parent().add_child(fireball)
 #		fireball.position = $Position2D.global_position
 	
-	
+# Metodo die
+# Cuando llamen a este metodo se reseteara la partida
 func die():
 	state = STOP
 	$AnimationPlayer.play("Die")
 	yield(get_node("AnimationPlayer"), "animation_finished")
 	get_tree().reload_current_scene()
 	
-
+# Metodo set_flip
+# Voltea el personaje
 func set_flip():
 	if velocity.x == 0:
 		return
@@ -100,7 +113,8 @@ func set_flip():
 #		$Sprite.position.x = 9
 	
 
-
+# Metodo set_animation
+# Inicia la animacion correspondiente
 func set_animation():
 	if state == STOP:
 		return
@@ -115,7 +129,8 @@ func set_animation():
 	
 	$AnimationPlayer.play(anim_name)
 
-
+# Metodo calculate_move_velocity
+# Calcula el incremento de la velocidad para que haga carrerilla
 func calculate_move_velocity(direction, is_jump_interrupted):
 	var new_velo = velocity
 	new_velo.x = speed.x * direction.x
@@ -127,6 +142,8 @@ func calculate_move_velocity(direction, is_jump_interrupted):
 	
 	velocity = new_velo
 
+# Metodo get_direction
+# Devuelve la dirección actual donde mira el personaje
 func get_direction():
 	return Vector2(
 		Input.get_action_strength("player_right") - Input.get_action_strength("player_left"),
@@ -143,6 +160,8 @@ func hit():
 func end_of_hit():
 	$AttackDetector.monitoring = false
 
+# Metodo _on_AttackDetector_body_entered(body)
+# Detecta si la espada golpea a un enemigo y le hace daño
 func _on_AttackDetector_body_entered(body):
 	if body.get_name() == "Boss":
 		body.damage(3)
